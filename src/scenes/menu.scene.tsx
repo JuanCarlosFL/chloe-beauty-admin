@@ -1,14 +1,11 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { NonAuthRoutes } from 'core/auth';
-import { SessionContext } from 'core/session-context';
+import React from 'react';
+import { AppLayout } from 'layout';
+import { MenuContainer } from 'pods/menu';
 
 export const MenuScene: React.FC = () => {
-  const { login } = useContext(SessionContext);
   return (
-    <>
-      <h1>Menú Scene!</h1>
-      <Link to={NonAuthRoutes.login}>{login}</Link>
-    </>
+    <AppLayout>
+      <MenuContainer />
+    </AppLayout>
   );
 };
