@@ -1,5 +1,5 @@
 const url = `${process.env.API_URL}/user`;
-const roleUrl = `${process.env.API_URL}/getRole`;
+const roleUrl = `${process.env.API_URL}/user/getRole`;
 const tokenUrl = `${process.env.API_URL}/api/jwtauth/requesttoken`;
 
 export const isValidLogin = async (
@@ -21,8 +21,9 @@ export const isValidLogin = async (
 };
 
 export const getRole = async (username: string): Promise<string> => {
-  const response = await fetch(roleUrl);
-  return response.json();
+  const response = await fetch(`${roleUrl}/${username}`);
+  const role = await response.json();
+  return role.status === 404 ? '' : role[0];
 };
 
 export const getToken = async (

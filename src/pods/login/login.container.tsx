@@ -10,15 +10,17 @@ import { AuthRoutes } from 'core/auth';
 export const LoginContainer: React.FC = () => {
   const [open, setOpen] = useState(false);
   const history = useHistory();
-  const { updateLogin, updateToken } = useContext(SessionContext);
+  const { updateLogin, updateToken, updateRole } = useContext(SessionContext);
 
   const handleLogin = async (login: viewModel.LoginVM) => {
     const isValid = await api.isValidLogin(login.username, login.password);
 
     if (isValid) {
       const token = await api.getToken(login.username, login.password);
+      const role = await api.getRole(login.username);
       updateLogin(login.username);
       updateToken(token);
+      updateRole(role);
       history.push(AuthRoutes.menu);
     } else {
       setOpen(true);
