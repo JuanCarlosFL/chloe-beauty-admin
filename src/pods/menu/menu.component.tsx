@@ -30,7 +30,7 @@ export const MenuComponent: React.FC = () => {
           size="medium"
           color="inherit"
           aria-label="Menu"
-          onClick={() => history.push(AuthRoutes.customer)}
+          onClick={() => history.push(AuthRoutes.customerList)}
         >
           <PersonIcon style={{ fontSize: '16vw' }} />
         </IconButton>

@@ -3,6 +3,7 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import {
   AppointmentScene,
   CustomerScene,
+  CustomerListScene,
   LoginScene,
   LoyaltyScene,
   MenuScene,
@@ -37,8 +38,8 @@ export const RouterComponent: React.FunctionComponent = () => {
         />
         <AuthRoute
           exact={true}
-          path={AuthRoutes.customer}
-          Component={CustomerScene}
+          path={AuthRoutes.customerList}
+          Component={CustomerListScene}
           requiredRoles={[String(UserRoles.administrator)]}
         />
         <AuthRoute
@@ -51,6 +52,12 @@ export const RouterComponent: React.FunctionComponent = () => {
           exact={true}
           path={AuthRoutes.treatment}
           Component={TreatmentScene}
+          requiredRoles={[String(UserRoles.administrator)]}
+        />
+        <AuthRoute
+          exact={true}
+          path={AuthRoutes.customer}
+          Component={CustomerScene}
           requiredRoles={[String(UserRoles.administrator)]}
         />
         <Route

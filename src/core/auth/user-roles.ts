@@ -14,7 +14,8 @@ export enum AuthRoutes {
   loyalty = '/loyalty',
   treatment = '/treatment',
   appointment = '/appointment',
-  customer = '/customer',
+  customerList = '/customer-list',
+  customer = '/customer/:id',
 }
 
 export enum NonAuthRoutes {

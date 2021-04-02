@@ -25,7 +25,7 @@ module.exports = merge.strategy({
   devServer: {
     inline: true,
     host: 'localhost',
-    port: 8080,
+    port: 8085,
     stats: 'minimal',
     hot: true,
   },
