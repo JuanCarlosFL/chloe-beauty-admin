@@ -26,7 +26,6 @@ interface Props {
 
 export const CustomerComponent: React.FC<Props> = props => {
   const { id, customer, onCancel, onCreate } = props;
-  console.log(customer.Name);
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -39,7 +38,8 @@ export const CustomerComponent: React.FC<Props> = props => {
       >
         <Formik
           onSubmit={onCreate}
-          initialValues={id === '0' ? createEmptyCustomer : customer}
+          initialValues={customer}
+          enableReinitialize={true}
           validate={formValidation.validateForm}
         >
           {() => (
@@ -53,6 +53,7 @@ export const CustomerComponent: React.FC<Props> = props => {
                   minWidth: 350,
                 }}
               >
+                <Field name="PersonId" label="Id" hidden />
                 <TextFieldComponent name="Name" label="Nombre" />
                 <TextFieldComponent name="Surname" label="Apellidos" />
                 <TextFieldComponent name="Email" label="Email" />

@@ -1,3 +1,4 @@
+import { CustomAlert } from 'common/components/alert';
 import { AuthRoutes } from 'core/auth';
 import { mapCustomerFromApiToVm } from 'pods/customer-list/customer-list.mapper';
 import {
@@ -15,6 +16,7 @@ interface Params {
 }
 
 export const CustomerContainer: React.FC = () => {
+  const [open, setOpen] = useState(false);
   const { id } = useParams<Params>();
   const [customer, setCustomer] = useState<Customer>(createEmptyCustomer);
   const history = useHistory();
@@ -26,23 +28,44 @@ export const CustomerContainer: React.FC = () => {
   };
 
   const handlingCreate = async (customer: Customer) => {
-    console.log(customer);
-    const response = await fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(customer),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    if (customer.PersonId === 0){
+      const response = await fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(customer),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
 
-    console.log(response.json());
+      if (data === false)
+        setOpen(true);
+      else 
+        history.push(AuthRoutes.customerList);
 
-    history.push(AuthRoutes.customerList);
+    } else {
+      await fetch(`${url}/${customer.PersonId}`, {
+        method: 'PUT',
+        body: JSON.stringify(customer),
+        headers: {
+          'Content-type': 'application/json',
+        },
+      });
+
+      history.push(AuthRoutes.customerList);
+    }
   };
 
   const handlingCancel = () => {
     history.push(AuthRoutes.customerList);
   };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway'){
+      return
+    }
+    setOpen(false);
+  }
 
   useEffect(() => {
     if (id !== '0') {
@@ -51,11 +74,14 @@ export const CustomerContainer: React.FC = () => {
   }, []);
 
   return (
-    <CustomerComponent
+    <>
+      <CustomerComponent
       id={id}
       onCreate={handlingCreate}
       customer={customer}
-      onCancel={handlingCancel}
-    />
+      onCancel={handlingCancel} />
+      <CustomAlert message='Ese usuario ya existe' severity='error' open={open} handleClose={handleClose} />
+      </>
+    
   );
 };
