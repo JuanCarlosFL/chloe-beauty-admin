@@ -9,7 +9,7 @@ export interface Customer {
   Points: number;
   Email: string;
   Comments: string;
-  ContactNow: string;
+  ContactHow: string;
 }
 
 export const createEmptyCustomer = {
@@ -23,5 +23,5 @@ export const createEmptyCustomer = {
   Points: 0,
   Email: '',
   Comments: '',
-  ContactNow: '',
+  ContactHow: '',
 };

@@ -9,7 +9,7 @@ export interface Customer {
   Points: number;
   Email: string;
   Comments: string;
-  ContactNow: string;
+  ContactHow: string;
   Deleted: boolean;
   ModifiedDate: string;
   Appointments: [];

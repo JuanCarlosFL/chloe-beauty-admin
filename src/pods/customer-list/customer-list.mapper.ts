@@ -16,7 +16,7 @@ export const mapCustomerFromApiToVm = (
     Points: customer.Points,
     Email: customer.Email,
     Comments: customer.Comments,
-    ContactNow: customer.ContactNow,
+    ContactHow: customer.ContactHow,
   };
 };
 

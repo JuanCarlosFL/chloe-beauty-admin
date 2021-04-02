@@ -69,7 +69,7 @@ export const CustomerListComponent: React.FC<Props> = props => {
                 <TableCell align="right">{customer.Points}</TableCell>
                 <TableCell align="right">{customer.Email}</TableCell>
                 <TableCell align="right">{customer.Comments}</TableCell>
-                <TableCell align="right">{customer.ContactNow}</TableCell>
+                <TableCell align="right">{customer.ContactHow}</TableCell>
                 <TableCell>
                   <Button
                     variant="contained"
