@@ -9,6 +9,8 @@ import {
   MenuScene,
   TreatmentScene,
   NonAuthScene,
+  TreatmentListScene,
+  LoyaltyListScene,
 } from 'scenes';
 import { AuthRoutes, NonAuthRoutes, UserRoles, AuthRoute } from 'core/auth';
 
@@ -44,6 +46,12 @@ export const RouterComponent: React.FunctionComponent = () => {
         />
         <AuthRoute
           exact={true}
+          path={AuthRoutes.loyaltyList}
+          Component={LoyaltyListScene}
+          requiredRoles={[String(UserRoles.administrator)]}
+        />
+        <AuthRoute
+          exact={true}
           path={AuthRoutes.loyalty}
           Component={LoyaltyScene}
           requiredRoles={[String(UserRoles.administrator)]}
@@ -52,6 +60,12 @@ export const RouterComponent: React.FunctionComponent = () => {
           exact={true}
           path={AuthRoutes.treatment}
           Component={TreatmentScene}
+          requiredRoles={[String(UserRoles.administrator)]}
+        />
+        <AuthRoute
+          exact={true}
+          path={AuthRoutes.treatmentList}
+          Component={TreatmentListScene}
           requiredRoles={[String(UserRoles.administrator)]}
         />
         <AuthRoute

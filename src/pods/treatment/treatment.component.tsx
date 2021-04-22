@@ -1,9 +1,9 @@
-import { Customer } from 'pods/customer-list/customer-list.vm';
 import React from 'react';
+import { TreatmentVM } from 'pods/treatment-list/treatment-list.vm';
 import { Formik, Form, Field } from 'formik';
 import { Button, Grid, withStyles } from '@material-ui/core';
 import { TextFieldComponent } from 'common/form';
-import { formValidation } from './customer.validation';
+import { formValidation } from './treatment.validation';
 
 const CancelButton = withStyles(() => ({
   root: {
@@ -15,17 +15,17 @@ const CancelButton = withStyles(() => ({
 }))(Button);
 
 interface Props {
-  id: string;
-  customer: Customer;
-  onCreate: (customer: Customer) => void;
-  onCancel: () => void;
-}
+    id: string;
+    treatment: TreatmentVM;
+    onCreate: (treatment: TreatmentVM) => void;
+    onCancel: () => void;
+  }
 
-export const CustomerComponent: React.FC<Props> = props => {
-  const { id, customer, onCancel, onCreate } = props;
+export const TreatmentComponent: React.FC<Props> = props => {
+    const { id, treatment, onCancel, onCreate } = props;
 
-  return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
       <Grid
         container
         alignItems="center"
@@ -35,7 +35,7 @@ export const CustomerComponent: React.FC<Props> = props => {
       >
         <Formik
           onSubmit={onCreate}
-          initialValues={customer}
+          initialValues={treatment}
           enableReinitialize={true}
           validate={formValidation.validateForm}
         >
@@ -50,20 +50,11 @@ export const CustomerComponent: React.FC<Props> = props => {
                   minWidth: 350,
                 }}
               >
-                <Field name="PersonId" label="Id" hidden />
+                <Field name="treatmentId" label="Id" hidden />
                 <TextFieldComponent name="Name" label="Nombre" />
-                <TextFieldComponent name="Surname" label="Apellidos" />
-                <TextFieldComponent name="Email" label="Email" />
-                <TextFieldComponent name="Telephone" label="Teléfono" />
-                <TextFieldComponent name="Address" label="Dirección" />
-                <TextFieldComponent name="Town" label="Ciudad" />
-                <TextFieldComponent name="PostCode" label="Código Postal" />
-                <TextFieldComponent name="Points" label="Puntos" />
-                <TextFieldComponent name="Comments" label="Comentario" />
-                <TextFieldComponent
-                  name="ContactHow"
-                  label="¿Cómo me conoció?"
-                />
+                <TextFieldComponent name="Duration" type="number" label="Duración" />
+                <TextFieldComponent name="Price" type="number" label="Precio" />
+                <TextFieldComponent name="Points" type="number" label="Puntos" />
                 <Grid container justify="space-between" spacing={2}>
                   <Button
                     type="submit"
@@ -91,5 +82,5 @@ export const CustomerComponent: React.FC<Props> = props => {
         </Formik>
       </Grid>
     </div>
-  );
+    );
 };

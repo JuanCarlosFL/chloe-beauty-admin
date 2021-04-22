@@ -1,6 +1,6 @@
 export enum UserRoles {
-  administrator = 'administrator',
-  client = 'client',
+  administrator = 'Administrator',
+  client = 'Client',
 }
 
 export const userRoles = {
@@ -11,11 +11,13 @@ export const userRoles = {
 
 export enum AuthRoutes {
   menu = '/menu',
-  loyalty = '/loyalty',
-  treatment = '/treatment',
-  appointment = '/appointment',
+  loyaltyList = '/loyalty-list',
+  loyalty = '/loyalty/:id',
+  treatmentList = '/treatment-list',
+  treatment = '/treatment/:id',
   customerList = '/customer-list',
   customer = '/customer/:id',
+  appointment = '/appointment',
 }
 
 export enum NonAuthRoutes {

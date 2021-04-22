@@ -50,7 +50,7 @@ export const MenuComponent: React.FC = () => {
           size="medium"
           color="inherit"
           aria-label="Menu"
-          onClick={() => history.push(AuthRoutes.loyalty)}
+          onClick={() => history.push(AuthRoutes.loyaltyList)}
         >
           <LoyaltyIcon style={{ fontSize: '16vw' }} />
         </IconButton>
@@ -90,7 +90,7 @@ export const MenuComponent: React.FC = () => {
           size="medium"
           color="inherit"
           aria-label="Menu"
-          onClick={() => history.push(AuthRoutes.treatment)}
+          onClick={() => history.push(AuthRoutes.treatmentList)}
         >
           <HealingIcon style={{ fontSize: '16vw' }} />
         </IconButton>
