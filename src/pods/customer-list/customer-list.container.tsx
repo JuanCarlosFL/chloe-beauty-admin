@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { generatePath, useHistory } from 'react-router';
 import { CustomerListComponent } from './customer-list.component';
 import { deleteCustomer, getCustomerList } from './api';
 import { Customer } from './customer-list.vm';
 import { mapCustomerListFromApiToVm } from './customer-list.mapper';
 import { AuthRoutes } from 'core/auth';
+import { SessionContext } from 'core/session-context';
 
 export const CutomerListContainer: React.FC = () => {
   const [customers, setCustomers] = useState<Customer[]>([]);
+  const { token } = useContext(SessionContext);
   const history = useHistory();
 
   const onLoadCustomerList = async () => {
     try {
-      const apiCustomerList = await getCustomerList();
+      const apiCustomerList = await getCustomerList(token);
       const viewModelCustomerList = mapCustomerListFromApiToVm(apiCustomerList);
       setCustomers(viewModelCustomerList);
     } catch (error) {
@@ -30,7 +32,7 @@ export const CutomerListContainer: React.FC = () => {
         `¿Seguro que quieres borrar este cliente ${id}? (S/N)`
       );
       if (res === 'S') {
-        const isDeleted = await deleteCustomer(id);
+        const isDeleted = await deleteCustomer(id, token);
         isDeleted ? onLoadCustomerList() : null;
       }
     } catch (error) {

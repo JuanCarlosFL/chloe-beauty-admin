@@ -44,7 +44,6 @@ export const LoyaltyComponent: React.FC<Props> = props => {
             onSubmit={onCreate}
             initialValues={loyalty}
             enableReinitialize={true}
-            // validate={formValidation.validateForm}
           >
             {() => (
               <Form>
@@ -61,7 +60,6 @@ export const LoyaltyComponent: React.FC<Props> = props => {
                 <Select
                     onChange={handleChange}
                     displayEmpty
-                    //className={classes.selectEmpty}
                     inputProps={{ 'aria-label': 'Without label' }}
                     value={loyalty.TreatmentId}
                     name={treatment.Name}

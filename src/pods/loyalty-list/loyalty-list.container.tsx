@@ -1,5 +1,6 @@
 import { AuthRoutes } from 'core/auth';
-import React, { useEffect, useState } from 'react';
+import { SessionContext } from 'core/session-context';
+import React, { useContext, useEffect, useState } from 'react';
 import { generatePath, useHistory } from 'react-router';
 import { deleteLoyalty, getLoyaltyList } from './api/loyalty-list.api';
 import { LoyaltyVM } from './loaylty-list.vm';
@@ -7,12 +8,13 @@ import { LoyaltyListComponent } from './loyalty-list.component';
 import { mapLoyaltyListFromApiToVm } from './loyalty-list.mapper';
 
 export const LoyaltyListContainer: React.FC = () => {
+    const { token } = useContext(SessionContext);
     const [loyalties, setLoyalties] = useState<LoyaltyVM[]>([]);
     const history = useHistory();
 
     const onLoadLoyaltyList = async () => {
         try {
-          const apiLoyaltyList = await getLoyaltyList();
+          const apiLoyaltyList = await getLoyaltyList(token);
           const viewModelLoyaltyList = mapLoyaltyListFromApiToVm(apiLoyaltyList);
           setLoyalties(viewModelLoyaltyList);
         } catch (error) {
@@ -30,7 +32,7 @@ export const LoyaltyListContainer: React.FC = () => {
             `¿Seguro que quieres borrar esta oferta ${id}? (S/N)`
           );
           if (res === 'S') {
-            const isDeleted = await deleteLoyalty(id);
+            const isDeleted = await deleteLoyalty(id, token);
             isDeleted ? onLoadLoyaltyList() : null;
           }
         } catch (error) {

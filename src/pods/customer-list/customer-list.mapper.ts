@@ -8,15 +8,15 @@ export const mapCustomerFromApiToVm = (
   return {
     PersonId: customer.PersonId,
     Name: customer.Name,
-    Surname: customer.Surname,
-    Telephone: customer.Telephone,
-    Address: customer.Address,
-    Town: customer.Town,
-    PostCode: customer.PostCode,
+    Surname: customer.Surname === null ? '' : customer.Surname,
+    Telephone: customer.Telephone === null ? '' : customer.Telephone,
+    Address: customer.Address === null ? '' : customer.Address,
+    Town: customer.Town === null ? '' : customer.Town,
+    PostCode: customer.PostCode === null ? '' : customer.PostCode,
     Points: customer.Points,
     Email: customer.Email,
-    Comments: customer.Comments,
-    ContactHow: customer.ContactHow,
+    Comments: customer.Comments === null ? '' : customer.Comments,
+    ContactHow: customer.ContactHow === null ? '' : customer.ContactHow,
   };
 };
 

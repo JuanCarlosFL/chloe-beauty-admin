@@ -1,11 +1,12 @@
 import { CustomAlert } from 'common/components/alert';
 import { AuthRoutes } from 'core/auth';
+import { SessionContext } from 'core/session-context';
 import { mapCustomerFromApiToVm } from 'pods/customer-list/customer-list.mapper';
 import {
   createEmptyCustomer,
   Customer,
 } from 'pods/customer-list/customer-list.vm';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { CustomerComponent } from './customer.component';
 
@@ -16,13 +17,18 @@ interface Params {
 }
 
 export const CustomerContainer: React.FC = () => {
+  const { token } = useContext(SessionContext);
   const [open, setOpen] = useState(false);
   const { id } = useParams<Params>();
   const [customer, setCustomer] = useState<Customer>(createEmptyCustomer);
   const history = useHistory();
 
   const getCustomer = async (id: string) => {
-    const response = await fetch(`${url}/${id}`);
+    const response = await fetch(`${url}/${id}`, {
+      headers: {
+        'Authorization': `bearer ${token}`
+      }
+    });
     const data = await response.json();
     setCustomer(mapCustomerFromApiToVm(data));
   };
@@ -34,6 +40,7 @@ export const CustomerContainer: React.FC = () => {
         body: JSON.stringify(customer),
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `bearer ${token}`
         },
       });
       const data = await response.json();
@@ -49,6 +56,7 @@ export const CustomerContainer: React.FC = () => {
         body: JSON.stringify(customer),
         headers: {
           'Content-type': 'application/json',
+          'Authorization': `bearer ${token}`
         },
       });
 
