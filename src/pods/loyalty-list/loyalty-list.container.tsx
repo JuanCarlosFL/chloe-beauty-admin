@@ -6,8 +6,11 @@ import { deleteLoyalty, getLoyaltyList } from './api/loyalty-list.api';
 import { LoyaltyVM } from './loaylty-list.vm';
 import { LoyaltyListComponent } from './loyalty-list.component';
 import { mapLoyaltyListFromApiToVm } from './loyalty-list.mapper';
+import { AlertDialog } from 'common/components/prompt';
 
 export const LoyaltyListContainer: React.FC = () => {
+    const [idLoyalty, setIdLoyalty] = useState<number>(0);
+    const [open, setOpen] = useState(false);
     const { token } = useContext(SessionContext);
     const [loyalties, setLoyalties] = useState<LoyaltyVM[]>([]);
     const history = useHistory();
@@ -27,18 +30,14 @@ export const LoyaltyListContainer: React.FC = () => {
     };
 
     const handleDelete = async (id: number) => {
-        try {
-          const res = prompt(
-            `¿Seguro que quieres borrar esta oferta ${id}? (S/N)`
-          );
-          if (res === 'S') {
-            const isDeleted = await deleteLoyalty(id, token);
-            isDeleted ? onLoadLoyaltyList() : null;
-          }
-        } catch (error) {
-          console.error(error);
-        }
+      setOpen(true);
+      setIdLoyalty(id);
     };
+
+    const confirmDelete = async () => {
+      const isDeleted = await deleteLoyalty(idLoyalty, token);
+      isDeleted ? onLoadLoyaltyList() : null;
+    }
 
     const handleEdit = (id: string) => {
         history.push(generatePath(AuthRoutes.loyalty, { id }));
@@ -52,12 +51,21 @@ export const LoyaltyListContainer: React.FC = () => {
         onLoadLoyaltyList();
     }, []);
 
-    return (<LoyaltyListComponent 
-                loyaltyList={loyalties}
-                handleDelete={handleDelete}
-                handleBack={handleBack}
-                handleEdit={handleEdit}
-                handleCreate={handleCreate}
-            />
+    return (
+      <>
+        <LoyaltyListComponent 
+            loyaltyList={loyalties}
+            handleDelete={handleDelete}
+            handleBack={handleBack}
+            handleEdit={handleEdit}
+            handleCreate={handleCreate}
+        />
+        <AlertDialog  title="Borrar Oferta"
+          open={open}
+          setOpen={setOpen}
+          onConfirm={confirmDelete}>
+            ¿Seguro que quiere borrar esta oferta?
+        </AlertDialog>
+      </>
     );
 }

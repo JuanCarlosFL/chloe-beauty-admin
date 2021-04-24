@@ -52,7 +52,7 @@ export const TreatmentContainer: React.FC = () => {
           method: 'PUT',
           body: JSON.stringify(treatment),
           headers: {
-            'Content-type': 'application/json',
+            'Content-Type': 'application/json',
             'Authorization': `bearer ${token}`
           },
         });

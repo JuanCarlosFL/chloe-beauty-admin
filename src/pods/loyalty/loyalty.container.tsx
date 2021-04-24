@@ -57,7 +57,6 @@ export const LoyaltyContainer: React.FC = () => {
             },
           });
           const data = await response.json();
-          console.log(data);
     
           if (data === false)
             setOpen(true);
@@ -69,7 +68,7 @@ export const LoyaltyContainer: React.FC = () => {
             method: 'PUT',
             body: JSON.stringify(loyalty),
             headers: {
-              'Content-type': 'application/json',
+              'Content-Type': 'application/json',
               'Authorization': `bearer ${token}`
             },
           });

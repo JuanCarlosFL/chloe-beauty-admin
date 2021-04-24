@@ -55,7 +55,7 @@ export const CustomerContainer: React.FC = () => {
         method: 'PUT',
         body: JSON.stringify(customer),
         headers: {
-          'Content-type': 'application/json',
+          'Content-Type': 'application/json',
           'Authorization': `bearer ${token}`
         },
       });

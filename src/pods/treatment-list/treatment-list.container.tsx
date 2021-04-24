@@ -6,8 +6,11 @@ import { mapTreatmentListFromApiToVm } from './treatment-list.mapper';
 import { AuthRoutes } from 'core/auth';
 import { TreatmentVM } from './treatment-list.vm';
 import { SessionContext } from 'core/session-context';
+import { AlertDialog } from 'common/components/prompt';
 
 export const TreatmentListContainer: React.FC = () => {
+  const [idTreatment, setIdTreatment] = useState<number>(0);
+  const [open, setOpen] = useState(false);
   const { token } = useContext(SessionContext);
   const [treatments, setTreatments] = useState<TreatmentVM[]>([]);
   const history = useHistory();
@@ -27,18 +30,14 @@ export const TreatmentListContainer: React.FC = () => {
   };
 
   const handleDelete = async (id: number) => {
-    try {
-      const res = prompt(
-        `¿Seguro que quieres borrar este tratamiento ${id}? (S/N)`
-      );
-      if (res === 'S') {
-        const isDeleted = await deleteTreatment(id, token);
-        isDeleted ? onLoadTreatmentList() : null;
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    setOpen(true);
+    setIdTreatment(id);
   };
+
+  const confirmDelete = async () => {
+    const isDeleted = await deleteTreatment(idTreatment, token);
+    isDeleted ? onLoadTreatmentList() : null;
+  }
 
   const handleEdit = (id: string) => {
     history.push(generatePath(AuthRoutes.treatment, { id }));
@@ -53,12 +52,20 @@ export const TreatmentListContainer: React.FC = () => {
   }, []);
 
   return (
-    <TreatmentListComponent
-      treatmentList={treatments}
-      handleDelete={handleDelete}
-      handleBack={handleBack}
-      handleEdit={handleEdit}
-      handleCreate={handleCreate}
-    />
+    <>
+      <TreatmentListComponent
+        treatmentList={treatments}
+        handleDelete={handleDelete}
+        handleBack={handleBack}
+        handleEdit={handleEdit}
+        handleCreate={handleCreate}
+      />
+      <AlertDialog  title="Borrar Tratamiento"
+        open={open}
+        setOpen={setOpen}
+        onConfirm={confirmDelete}>
+          ¿Seguro que quiere borrar este tratamiento?
+      </AlertDialog>
+    </>
   );
 };
