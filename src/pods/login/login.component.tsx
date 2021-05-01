@@ -7,13 +7,15 @@ import { formValidation } from './login.validation';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
-
+// Tipamos las props
 interface Props {
   onLogin: (login: LoginVM) => void;
 }
 
 export const LoginComponent: React.FC<Props> = props => {
+  // Guardamos la info que nos viene por props
   const { onLogin } = props;
+  // Pintamos el formulario para el login del usuario
   return (
     <Card style={{ marginTop: '5rem' }}>
       <CardHeader title="Login" />

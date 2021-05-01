@@ -6,7 +6,8 @@ import HealingIcon from '@material-ui/icons/Healing';
 import { AuthRoutes } from 'core/auth';
 import React from 'react';
 import { useHistory } from 'react-router';
-
+// Componente que pinta el menú con los cuatro iconos de las opciones disponibles en la aplicación
+// Mandando a las rutas necesarias para pintar los componentes correspondientes en función de la elección
 export const MenuComponent: React.FC = () => {
   const history = useHistory();
 

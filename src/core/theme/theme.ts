@@ -3,7 +3,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { Theme } from './theme.model';
 
 const defaultTheme = createMuiTheme();
-
+// Personalizamos los colores que queremos para nuestro tema
 export const theme: Theme = merge(defaultTheme, {
   palette: {
     primary: {

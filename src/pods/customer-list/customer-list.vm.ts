@@ -1,3 +1,4 @@
+// Viewmodel que usaremos en nuestra aplicación
 export interface Customer {
   PersonId: number;
   Name: string;
@@ -11,7 +12,7 @@ export interface Customer {
   Comments: string;
   ContactHow: string;
 }
-
+// Función que crea un usuario vacío
 export const createEmptyCustomer = {
   PersonId: 0,
   Name: '',

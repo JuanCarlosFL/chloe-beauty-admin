@@ -1,3 +1,4 @@
+// Viewmodel que usaremos en nuestra aplicación
 export interface TreatmentVM {
     TreatmentId: number;
     Name: string;
@@ -5,7 +6,7 @@ export interface TreatmentVM {
     Price: number;
     Points: number;
 }
-
+// Función que crea un tratamiento vacío
 export const createEmptyTreatment = {
     TreatmentId: 0,
     Name: '',

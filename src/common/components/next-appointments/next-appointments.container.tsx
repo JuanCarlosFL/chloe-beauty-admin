@@ -1,14 +1,16 @@
 import { SessionContext } from 'core/session-context';
 import React, { useContext, useEffect, useState } from 'react';
-import { AvailabilitiesComponent } from './availabilities.component';
-import { AppointmentsVM } from './availabilities.vm';
+import { NextAppointmentsComponent } from './next-appointments.component';
+import { NextAppointmentsVM } from './next-appointments.vm';
 
 const url = `${process.env.API_URL}/appointment`;
 
-export const AvailabilitiesContainer: React.FC = () => {
+export const NextAppointmentsContainer: React.FC = () => {
+    // Traemos el token del context
     const { token } = useContext(SessionContext);
-    const [ appointments, setAppointments ] = useState<AppointmentsVM[]>([]);
-
+    // Creamos un array de citas vacío
+    const [ appointments, setAppointments ] = useState<NextAppointmentsVM[]>([]);
+    // Función que carga la lista de citas
     const handleLoadAppointments = async () => {
         const response = await fetch(url, {
             headers: {
@@ -19,10 +21,10 @@ export const AvailabilitiesContainer: React.FC = () => {
         const data = await response.json();
         setAppointments(data);
     }
-
+    // Cargamos las citas cuando se monta el componente
     useEffect(() => {
         handleLoadAppointments();
     }, [])
-
-    return <AvailabilitiesComponent appointments={appointments}/>
+    // Llamamos al componente pasándole la colección de citas
+    return <NextAppointmentsComponent appointments={appointments}/>
 }

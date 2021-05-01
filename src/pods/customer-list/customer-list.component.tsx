@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { Customer } from './customer-list.vm';
-
+// Tipamos las props
 interface Props {
   customerList: Customer[];
   handleDelete: (id: number) => void;
@@ -20,6 +20,7 @@ interface Props {
 }
 
 export const CustomerListComponent: React.FC<Props> = props => {
+  // Guardamos las props recibidas
   const {
     customerList,
     handleDelete,
@@ -27,7 +28,7 @@ export const CustomerListComponent: React.FC<Props> = props => {
     handleEdit,
     handleCreate,
   } = props;
-
+  // Pintamos una tabla con la colección de usuarios
   return (
     <>
       <Button
@@ -56,6 +57,7 @@ export const CustomerListComponent: React.FC<Props> = props => {
             </TableRow>
           </TableHead>
           <TableBody>
+            {/* Iteramos sobre la colección para pintar las filas con los registros */}
             {customerList.map(customer => (
               <TableRow key={customer.PersonId}>
                 <TableCell component="th" scope="row">

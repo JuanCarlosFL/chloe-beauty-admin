@@ -1,10 +1,8 @@
 import * as viewModel from './treatment-list.vm';
 import * as apiModel from './api/treatment.list.api.model';
 import { mapToCollection } from 'common/mappers';
-
-export const mapTreatmentFromApiToVm = (
-  treatment: apiModel.Treatment
-): viewModel.TreatmentVM => {
+// Función que recibie un tratamiento de la api y lo mapea al cliente del viewmodel
+export const mapTreatmentFromApiToVm = (treatment: apiModel.Treatment): viewModel.TreatmentVM => {
   return {
     TreatmentId: treatment.TreatmentId,
     Name: treatment.Name,
@@ -13,8 +11,6 @@ export const mapTreatmentFromApiToVm = (
     Points: treatment.Points,
   };
 };
-
-export const mapTreatmentListFromApiToVm = (
-  treatmentList: apiModel.Treatment[]
-): viewModel.TreatmentVM[] =>
+// Función que recibe una lista de tratamientos y lo mapea al viewmodel
+export const mapTreatmentListFromApiToVm = (treatmentList: apiModel.Treatment[]): viewModel.TreatmentVM[] =>
   mapToCollection(treatmentList, t => mapTreatmentFromApiToVm(t));

@@ -1,10 +1,8 @@
 import * as viewModel from './loaylty-list.vm';
 import * as apiModel from './api/loyalty-list.api.model';
 import { mapToCollection } from 'common/mappers';
-
-export const mapLoyaltyFromApiToVm = (
-    loyalty: apiModel.Loyalty
-): viewModel.LoyaltyVM => {
+// Función que recibie una oferta de la api y lo mapea al cliente del viewmodel
+export const mapLoyaltyFromApiToVm = (loyalty: apiModel.Loyalty): viewModel.LoyaltyVM => {
     return {
         LoyaltyId: loyalty.LoyaltyId,
         TreatmentId: loyalty.TreatmentId,
@@ -12,8 +10,6 @@ export const mapLoyaltyFromApiToVm = (
         Points: loyalty.Points,
     };
 };
-
-export const mapLoyaltyListFromApiToVm = (
-    loyaltyList: apiModel.Loyalty[]
-): viewModel.LoyaltyVM[] =>
+// Función que recibe una lista de ofertas y lo mapea al viewmodel
+export const mapLoyaltyListFromApiToVm = (loyaltyList: apiModel.Loyalty[]): viewModel.LoyaltyVM[] =>
     mapToCollection(loyaltyList, l=> mapLoyaltyFromApiToVm(l));

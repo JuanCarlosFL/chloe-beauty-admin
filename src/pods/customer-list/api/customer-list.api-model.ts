@@ -1,3 +1,4 @@
+// Modelo que recibimos de la api
 export interface Customer {
   PersonId: number;
   Name: string;

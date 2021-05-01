@@ -13,7 +13,7 @@ import {
   LoyaltyListScene,
 } from 'scenes';
 import { AuthRoutes, NonAuthRoutes, UserRoles, AuthRoute } from 'core/auth';
-
+// Componente que usa React Router Dom y las rutas creadas para redirigir al usuario al componente correspondiente
 export const RouterComponent: React.FunctionComponent = () => {
   return (
     <Router>

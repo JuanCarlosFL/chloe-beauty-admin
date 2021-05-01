@@ -9,13 +9,9 @@ interface Props {
   exact?: boolean;
   requiredRoles: string[];
 }
-
-export const AuthRoute = ({
-  Component,
-  path,
-  exact = false,
-  requiredRoles,
-}: Props): JSX.Element => {
+// La idea para las rutas autorizadas las saqué de este artículo: https://www.tuckerblackwell.com/handle-auth-with-react-router-and-typescript/
+// Yo lo he adapatado ya que en vez de usar el localstorage he usado el context para almacenar token y role
+export const AuthRoute = ({Component, path, exact = false, requiredRoles}: Props): JSX.Element => {
   const message = 'Please log in to view this page';
   const { token, role } = useContext(SessionContext);
   const userHasRequiredRole = requiredRoles.includes(role);

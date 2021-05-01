@@ -1,3 +1,4 @@
+// Función para formatear las fechas según queremos mostrarlas
 export const getFormatDate = (date: string): string => {
     const months: string[] = [
       'Enero',

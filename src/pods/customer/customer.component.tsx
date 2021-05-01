@@ -4,7 +4,7 @@ import { Formik, Form, Field } from 'formik';
 import { Button, Grid, withStyles } from '@material-ui/core';
 import { TextFieldComponent } from 'common/form';
 import { formValidation } from './customer.validation';
-
+// Modificamos estilos del botón
 const CancelButton = withStyles(() => ({
   root: {
     backgroundColor: '#bb2124',
@@ -13,7 +13,7 @@ const CancelButton = withStyles(() => ({
     },
   },
 }))(Button);
-
+// Tipamos las props
 interface Props {
   id: string;
   customer: Customer;
@@ -22,8 +22,9 @@ interface Props {
 }
 
 export const CustomerComponent: React.FC<Props> = props => {
+  // Guardamos la info que nos viene por props
   const { id, customer, onCancel, onCreate } = props;
-
+  // Pintamos el formulario para poder modificar o crear un nuevo registro
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       <Grid

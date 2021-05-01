@@ -3,7 +3,7 @@ import {
   Palette as DefaultPalette,
   PaletteColor,
 } from '@material-ui/core/styles/createPalette';
-
+// Seleccionamos la paleta para el theme
 interface Palette extends DefaultPalette {
   table: {
     row: PaletteColor;

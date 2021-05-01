@@ -1,7 +1,7 @@
 import React from 'react';
 import { useField } from 'formik';
 import MuiTextField, { TextFieldProps } from '@material-ui/core/TextField';
-
+// Componente de personalización de los TextField de los formularios
 export const TextFieldComponent: React.FC<TextFieldProps> = props => {
   const [field, meta] = useField(props.name);
   const textFieldProps = Boolean(field) ? field : props;

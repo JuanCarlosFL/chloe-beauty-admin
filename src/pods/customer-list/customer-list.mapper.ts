@@ -1,10 +1,8 @@
 import * as viewModel from './customer-list.vm';
 import * as apiModel from './api/customer-list.api-model';
 import { mapToCollection } from 'common/mappers';
-
-export const mapCustomerFromApiToVm = (
-  customer: apiModel.Customer
-): viewModel.Customer => {
+// Función que recibie un cliente de la api y lo mapea al cliente del viewmodel
+export const mapCustomerFromApiToVm = (customer: apiModel.Customer): viewModel.Customer => {
   return {
     PersonId: customer.PersonId,
     Name: customer.Name,
@@ -19,8 +17,6 @@ export const mapCustomerFromApiToVm = (
     ContactHow: customer.ContactHow === null ? '' : customer.ContactHow,
   };
 };
-
-export const mapCustomerListFromApiToVm = (
-  employeeList: apiModel.Customer[]
-): viewModel.Customer[] =>
-  mapToCollection(employeeList, e => mapCustomerFromApiToVm(e));
+// Función que recibe una lista de clientes y lo mapea al viewmodel
+export const mapCustomerListFromApiToVm = (customerList: apiModel.Customer[]): viewModel.Customer[] =>
+  mapToCollection(customerList, e => mapCustomerFromApiToVm(e));

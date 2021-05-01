@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+// El context es donde almacenamos los valores que son comunes a la aplicación y que podemos llamar desde cualquier componente
 interface Context {
   login: string;
   token: string;
@@ -8,7 +8,7 @@ interface Context {
   updateToken: (value: string) => void;
   updateRole: (value: string) => void;
 }
-
+// Creamos el contexto con las variables y funciones para actualizar las variables que necesitamos
 export const SessionContext = React.createContext<Context>({
   login: 'no user',
   token: 'no token',
@@ -29,7 +29,7 @@ export const SessionContext = React.createContext<Context>({
     );
   },
 });
-
+// En el componente lo primero es actualizar los valores de inicio
 export const SessionProvider: React.FC = props => {
   const [login, setLogin] = useState('');
   const [token, setToken] = useState('');

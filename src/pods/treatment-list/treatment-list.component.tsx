@@ -10,7 +10,7 @@ import {
   } from '@material-ui/core';
   import React from 'react';
   import { TreatmentVM } from './treatment-list.vm';
-  
+  // Tipamos las props
   interface Props {
     treatmentList: TreatmentVM[];
     handleDelete: (id: number) => void;
@@ -20,6 +20,7 @@ import {
   }
   
   export const TreatmentListComponent: React.FC<Props> = props => {
+    // Guardamos las props recibidas
     const {
       treatmentList,
       handleDelete,
@@ -27,7 +28,7 @@ import {
       handleEdit,
       handleCreate,
     } = props;
-  
+    // Pintamos una tabla con la colección de tratamientos
     return (
       <>
         <Button
@@ -50,6 +51,7 @@ import {
               </TableRow>
             </TableHead>
             <TableBody>
+              {/* Iteramos sobre la colección para pintar las filas con los registros */}
               {treatmentList.map(treatment => (
                 <TableRow key={treatment.TreatmentId}>
                   <TableCell component="th" scope="row">
